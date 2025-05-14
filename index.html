@@ -108,6 +108,59 @@
     .light-theme .card img {
       filter: none;
     }
+    
+      .hero {
+    background-color: #fdf6e3;
+    color: #111;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .hero .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .hero .button {
+    background-color: #673AB7;
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .hero .button:hover {
+    background-color: #512DA8;
+  }
+
+  /* Tema escuro */
+  .dark-theme .hero {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .dark-theme .hero .button {
+    background-color: #673AB7;;
+    color: var(--bg-color);
+  }
+
+  .dark-theme .hero .button:hover {
+    background-color: #512DA8;
+  }
 
     .light-theme .footer {
       background-color: #3b0a25;
@@ -205,15 +258,26 @@
         <p>Venda de horas de mentoria técnica espacial.</p>
       </div>
     </section>
+    
+    <!-- Mensagem Promocional -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Engenharia e Missões Espaciais</h1>
+        <p>
+          Conheça os nossos projetos de simulação, modelagem digital e estudos reais para capacitação em engenharia espacial, usando dados de missões "ITA, Space-M, ITA-Rocket" como base em estudo de Pesquisas.
+        </p>
+        <button class="button">Ver Atualizações</button>
+      </div>
+    </section>
 
     <footer class="footer">
-       <div>
+      <div>
       📢 Últimas atualizações | <a href="#">Agende uma consultoria</a>
-      </div>
-      <div style="margin-top: 0.5rem;">
-        &copy; 2025 JTVEIGA® – Todos os direitos reservados. Os conteúdos desta página não podem ser reproduzidos sem autorização prévia.
-        <br>Autor: <strong>M.Sc Jackson T. Veiga</strong>
-      </div>
+        </div>
+        <div style="margin-top: 0.5rem;">
+          &copy; 2025 JTVEIGA® – Todos os direitos reservados. O conteúdo de pesquisa deste documento não pode ser reproduzido sem autorização prévia.
+          <br>Autor: <strong>M.Sc Jackson T. Veiga</strong>
+        </div>
     </footer>
   </main>
 
