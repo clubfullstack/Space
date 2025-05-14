@@ -6,135 +6,145 @@
   <title>Comunidade SPACE</title>
   <style>
     :root {
-      --bg-color: #000;
-      --text-color: #fff;
-      --highlight-color: #e62429;
-      --card-bg: #111;
+      --highlight-color: #e63946;
+      --card-bg: #2b2b2b;
       --card-text: #ccc;
+      --bg-color: #0f0f0f;
+      --text-color: #eee;
     }
 
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
 
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #444;
+      color: #fff;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .light-theme .theme-toggle {
+      background-color: #ddd;
+      color: #000;
+    }
+
+    /* Header */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .dark-theme header {
       background-color: #0a0a0a;
-      position: fixed;
-      width: 100%;
-      z-index: 999;
       color: white;
-      flex-wrap: wrap;
+    }
+
+    .light-theme header {
+      background-color: #3b0a25;
+      color: #fff;
     }
 
     header h1 {
-      font-size: 2.2rem;
       margin: 0;
+      font-size: 2.2rem;
     }
 
+    /* Grid layout */
     .grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      padding: 8rem 1rem 3rem;
+      padding: 3rem 1rem;
     }
 
+    /* Card */
     .card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
-      text-align: center;
-      width: 160px;
+      width: 200px;
       padding: 1rem;
-      transition: transform 0.2s;
-      color: var(--card-text);
+      text-align: center;
+      border-radius: 12px;
+      transition: background-color 0.3s, color 0.3s, transform 0.2s;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
-    }
-    
-     .card img {
-     filter: brightness(0) invert(1);
-    }
     .card img {
-      width: 60px;
-      height: 60px;
+      width: 64px;
+      height: 64px;
       margin-bottom: 1rem;
+      transition: filter 0.3s;
     }
 
     .card h3 {
-      font-size: 1.1rem;
       margin: 0.5rem 0;
-      color: white;
+      font-size: 1.1rem;
     }
 
     .card p {
       font-size: 0.85rem;
+    }
+
+    /* Light Theme */
+    .light-theme {
+      background-color: #fdf6e3;
+      color: #333;
+    }
+
+    .light-theme .card {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .light-theme .card img {
+      filter: none;
+    }
+
+    .light-theme .footer {
+      background-color: #3b0a25;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .light-theme .footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* Dark Theme */
+    .dark-theme {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .dark-theme .card {
+      background-color: var(--card-bg);
+      border: 1px solid #333;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
       color: var(--card-text);
     }
 
-    nav {
-      display: flex;
-      gap: 1.5rem;
+    .dark-theme .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
     }
 
-    nav a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 500;
+    .dark-theme .card img {
+      filter: brightness(0) invert(1);
     }
 
-    .hero {
-      background-image: url('https://www.nasa.gov/wp-content/uploads/2023/03/iss068e047040.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8rem 2rem 2rem;
-    }
-
-    .hero-content {
-      max-width: 600px;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 900;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    .button {
-      margin-top: 1.5rem;
-      background-color: var(--highlight-color);
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    footer {
+    .dark-theme .footer {
       background-color: #111;
       color: #aaa;
       text-align: center;
@@ -142,99 +152,77 @@
       font-size: 0.9rem;
     }
 
-    footer a {
+    .dark-theme .footer a {
       color: var(--highlight-color);
       text-decoration: none;
     }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-    }
   </style>
 </head>
-<body>
+<body class="dark-theme">
+  <button class="theme-toggle" onclick="toggleTheme()">🌗 Trocar Tema</button>
 
-  <header>
-    <h1>🌌 Comunidade SPACE</h1>
-    <p>Exploração, Modelagem e Consultoria Espacial</p>
-    <br>Autor: <strong>M.Sc Jackson T. Veiga</strong>
-  </header>
-
-  <section class="grid">
-    <div class="card">
-      <img src="https://img.icons8.com/ios-filled/100/satellite.png" alt="Simulação Orbital">
-      <h3>Simulação Orbital</h3>
-      <p>Aulas e dados sobre simulação e propagadores.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://img.icons8.com/ios-filled/100/artificial-intelligence.png" alt="Modelagem Digital">
-      <h3>Modelagem Digital</h3>
-      <p>Modelos PFS, AAS e Digital Twin.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://img.icons8.com/ios-filled/100/book.png" alt="Base de Aulas">
-      <h3>Base de Aulas</h3>
-      <p>PDFs, vídeos e slides disponíveis.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://img.icons8.com/ios-filled/100/speech-bubble.png" alt="Fórum Espacial">
-      <h3>Fórum Espacial</h3>
-      <p>Discussões técnicas e perguntas abertas.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://img.icons8.com/ios-filled/100/combo-chart.png" alt="Projetos Simulados">
-      <h3>Projetos Simulados</h3>
-      <p>Estudos reais e simulações orientadas.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://img.icons8.com/ios-filled/100/shopping-cart.png" alt="Consultoria">
-      <h3>Consultoria</h3>
-      <p>Venda de horas de mentoria para alunos.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://img.icons8.com/ios-filled/100/news.png" alt="Publicações">
-      <h3>Publicações</h3>
-      <p>Modelos e templates de artigos.</p>
-    </div>
-  </section>
-
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Engenharia e Missões Espaciais</h1>
-      <p>
-        Conheça os nossos projetos de simulação, modelagem digital e estudos reais para capacitação em engenharia espacial, usando dados e missões da NASA como base de estudo.
-      </p>
-      <button class="button">Ver Atualizações</button>
-    </div>
-  </section>
-
-  <footer>
-    <div>
-      📢 Últimas atualizações | <a href="#">Agende uma consultoria</a>
-    </div>
-    <div style="margin-top: 0.5rem;">
-      &copy; 2025 JTVEIGA® – Todos os direitos reservados. O conteúdo de pesquisa deste documento não pode ser reproduzido sem autorização prévia.
+  <main>
+    <header>
+      <h1>🌌 Comunidade SPACE</h1>
+      <p>Exploração, Modelagem e Consultoria Espacial</p>
       <br>Autor: <strong>M.Sc Jackson T. Veiga</strong>
-    </div>
-  </footer>
+    </header>
 
+    <section class="grid">
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/100/satellite.png" alt="Simulação Orbital">
+        <h3>Simulação Orbital</h3>
+        <p>Aulas e dados sobre simulação e propagadores.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/100/artificial-intelligence.png" alt="Modelagem Digital">
+        <h3>Modelagem Digital</h3>
+        <p>Modelos PFS, AAS e Digital Twin.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/100/book.png" alt="Base de Aulas">
+        <h3>Base de Aulas</h3>
+        <p>PDFs, vídeos e slides disponíveis.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/100/speech-bubble.png" alt="Fórum Espacial">
+        <h3>Fórum Espacial</h3>
+        <p>Discussões técnicas e perguntas abertas.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/100/combo-chart.png" alt="Projetos Simulados">
+        <h3>Projetos Simulados</h3>
+        <p>Estudos reais e simulações orientadas.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/100/shopping-cart.png" alt="Consultoria">
+        <h3>Consultoria</h3>
+        <p>Venda de horas de mentoria técnica espacial.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+       <div>
+      📢 Últimas atualizações | <a href="#">Agende uma consultoria</a>
+      </div>
+      <div style="margin-top: 0.5rem;">
+        &copy; 2025 JTVEIGA® – Todos os direitos reservados. Os conteúdos desta página não podem ser reproduzidos sem autorização prévia.
+        <br>Autor: <strong>M.Sc Jackson T. Veiga</strong>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle("dark-theme");
+      body.classList.toggle("light-theme");
+    }
+  </script>
 </body>
 </html>
