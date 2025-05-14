@@ -209,6 +209,39 @@
       color: var(--highlight-color);
       text-decoration: none;
     }
+    
+   .dark-theme #countdown {
+      font-size: 2rem;
+      background-color: #222;
+      padding: 15px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffff;
+      max-width: 300px;
+      text-align: center;
+      margin: 0 auto;
+    }
+    
+    .light-theme #countdown {
+      font-size: 2rem;
+      background-color: #f0f0f0;
+      color: #000;
+      padding: 15px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #999999;
+      max-width: 300px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .event-info {
+      margin-top: 30px;
+      max-width: 600px;
+      text-align: center;
+      font-size: 1rem;
+      color: #ccc;
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
 </head>
 <body class="dark-theme">
@@ -261,6 +294,13 @@
       </div>
     </section>
     
+      <!-- Contagem Regressiva LASC -->
+    <h1>Contagem Regressiva para o LASC 2025 🚀</h1>
+      <div id="countdown">Carregando...</div>
+      <div class="event-info">
+        Temos o prazer de anunciar que a sexta edição do LASC acontecerá entre <strong>5 e 8 de novembro de 2025</strong>, nas cidades de <strong>Bauru</strong> e <strong>Iacanga</strong>, São Paulo, Brasil.
+      </div>
+        
     <!-- Mensagem Promocional -->
     <section class="hero">
       <div class="hero-content">
@@ -289,6 +329,28 @@
       body.classList.toggle("dark-theme");
       body.classList.toggle("light-theme");
     }
+    
+     // Data do início do evento: 5 de novembro de 2025 às 09h
+    const eventoData = new Date("2025-11-05T09:00:00-03:00").getTime();
+
+    const atualizarContagem = setInterval(() => {
+      const agora = new Date().getTime();
+      const tempoRestante = eventoData - agora;
+
+      if (tempoRestante < 0) {
+        clearInterval(atualizarContagem);
+        document.getElementById("countdown").innerHTML = "🚀 O LASC 2025 começou!";
+        return;
+      }
+
+      const dias = Math.floor(tempoRestante / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((tempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((tempoRestante % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    }, 1000);
   </script>
 </body>
 </html>
