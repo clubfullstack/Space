@@ -1,0 +1,17 @@
+[
+  {
+    "titulo": "Como calcular órbitas de satélites LEO?",
+    "autor": "Ana",
+    "mensagem": "Estou desenvolvendo um projeto para um cubesat e preciso simular a órbita. Alguém recomenda ferramentas?"
+  },
+  {
+    "titulo": "Melhores práticas para criar um Digital Twin",
+    "autor": "Carlos",
+    "mensagem": "Estou usando a abordagem PFS com Shell Administrativa. Como modelar eventos de falha?"
+  },
+  {
+    "titulo": "Dúvidas sobre sensores embarcados em microgravidade",
+    "autor": "Luna",
+    "mensagem": "Quais sensores térmicos funcionam melhor em ambiente de microgravidade?"
+  }
+]
