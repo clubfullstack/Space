@@ -2,109 +2,114 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulário de Post</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fórum Espacial</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #000;
+      box-shadow: 0 2px 10px #00ffff33;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #00ffff;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .forum-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 800px;
+      margin: 40px auto;
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .forum-post {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffff33;
+    }
+
+    .forum-post h2 {
+      margin-top: 0;
+      color: #00ffff;
+    }
+
+    .forum-post p {
+      margin-bottom: 0;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin: 40px 0;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Adicionar Novo Post</h1>
+    <h1>Fórum Espacial</h1>
+    <p>Discussões técnicas e perguntas abertas</p>
   </header>
 
-  <main>
-    <form id="postForm">
-      <label for="titulo">Título:</label>
-      <input type="text" id="titulo" name="titulo" required /><br/><br/>
+  <div class="forum-container" id="forum">
+    <!-- Os posts serão inseridos aqui dinamicamente -->
+  </div>
 
-      <label for="resumo">Resumo:</label>
-      <textarea id="resumo" name="resumo" required></textarea><br/><br/>
-
-      <label for="aprendizados">Aprendizados:</label>
-      <textarea id="aprendizados" name="aprendizados" required></textarea><br/><br/>
-
-      <label for="ferramentas">Ferramentas Utilizadas:</label>
-      <textarea id="ferramentas" name="ferramentas" required></textarea><br/><br/>
-
-      <label for="convite">Convite:</label>
-      <textarea id="convite" name="convite" required></textarea><br/><br/>
-
-      <button type="submit">Adicionar Post</button>
-    </form>
-
-    <h2>Posts Salvos (no LocalStorage)</h2>
-    <ul id="postList"></ul>
-
-    <button id="downloadJson">Baixar JSON</button>
-  </main>
-
-  <footer>
-    <a href="index.html">← Voltar para o Início</a>
-  </footer>
+  <div class="footer">
+    © 2025 Comunidade SPACE
+  </div>
 
   <script>
-    // Função para carregar e exibir os posts salvos no LocalStorage
-    function carregarPosts() {
-      const posts = JSON.parse(localStorage.getItem('posts')) || [];
-      const postList = document.getElementById('postList');
-      postList.innerHTML = '';
-      posts.forEach(post => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${post.titulo}</strong><br><small>${post.resumo}</small>`;
-        postList.appendChild(li);
-      });
-    }
+    // Exemplo de "base de dados" (mock JSON dos tópicos do fórum)
+    const posts = [
+      {
+        titulo: "Como calcular órbitas de satélites LEO?",
+        autor: "Ana",
+        mensagem: "Estou desenvolvendo um projeto para um cubesat e preciso simular a órbita. Alguém recomenda ferramentas?"
+      },
+      {
+        titulo: "Melhores práticas para criar um Digital Twin",
+        autor: "Carlos",
+        mensagem: "Estou usando a abordagem PFS com Shell Administrativa. Como modelar eventos de falha?"
+      },
+      {
+        titulo: "Dúvidas sobre sensores embarcados em microgravidade",
+        autor: "Luna",
+        mensagem: "Quais sensores térmicos funcionam melhor em ambiente de microgravidade?"
+      }
+    ];
 
-    // Função para adicionar post ao LocalStorage
-    document.getElementById('postForm').addEventListener('submit', function (event) {
-      event.preventDefault();
+    const forum = document.getElementById("forum");
 
-      const titulo = document.getElementById('titulo').value;
-      const resumo = document.getElementById('resumo').value;
-      const aprendizados = document.getElementById('aprendizados').value.split('\n');
-      const ferramentas = document.getElementById('ferramentas').value.split('\n');
-      const convite = document.getElementById('convite').value;
-
-      // Cria um novo post com estrutura JSON
-      const novoPost = {
-        titulo,
-        resumo,
-        aprendizados,
-        ferramentas,
-        convite,
-        dataCriacao: new Date().toLocaleString()
-      };
-
-      // Carrega os posts existentes do LocalStorage
-      const posts = JSON.parse(localStorage.getItem('posts')) || [];
-
-      // Adiciona o novo post à lista
-      posts.push(novoPost);
-
-      // Salva a lista atualizada no LocalStorage
-      localStorage.setItem('posts', JSON.stringify(posts));
-
-      // Limpa o formulário
-      document.getElementById('postForm').reset();
-
-      // Recarrega e exibe os posts
-      carregarPosts();
+    posts.forEach(post => {
+      const div = document.createElement("div");
+      div.className = "forum-post";
+      div.innerHTML = `
+        <h2>${post.titulo}</h2>
+        <p><strong>Autor:</strong> ${post.autor}</p>
+        <p>${post.mensagem}</p>
+      `;
+      forum.appendChild(div);
     });
-
-    // Função para baixar o arquivo JSON com os posts do LocalStorage
-    document.getElementById('downloadJson').addEventListener('click', function () {
-      const posts = JSON.parse(localStorage.getItem('posts')) || [];
-
-      // Cria um arquivo JSON a partir dos dados
-      const jsonBlob = new Blob([JSON.stringify(posts, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(jsonBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'posts.json';
-      link.click();
-      URL.revokeObjectURL(url);
-    });
-
-    // Carregar os posts ao carregar a página
-    carregarPosts();
   </script>
 </body>
 </html>
