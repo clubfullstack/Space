@@ -1,109 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fórum Espacial</title>
-  <style>
-    body {
-      background-color: #111;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      text-align: center;
-      padding: 20px;
-      background-color: #000;
-      box-shadow: 0 2px 10px #00ffff33;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      color: #00ffff;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #ccc;
-    }
-
-    .forum-container {
-      display: grid;
-      grid-template-columns: 1fr;
-      max-width: 800px;
-      margin: 40px auto;
-      gap: 20px;
-      padding: 0 20px;
-    }
-
-    .forum-post {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ffff33;
-    }
-
-    .forum-post h2 {
-      margin-top: 0;
-      color: #00ffff;
-    }
-
-    .forum-post p {
-      margin-bottom: 0;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      margin: 40px 0;
-    }
-  </style>
+  <title>Fórum Inteligente</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <h1>Fórum Espacial</h1>
-    <p>Discussões técnicas e perguntas abertas</p>
+<body class="bg-gray-900 text-white min-h-screen">
+  <header class="flex items-center justify-between px-6 py-4 bg-gray-800 shadow">
+    <div class="text-xl font-semibold">🧠 Fórum Inteligente</div>
+    <nav class="space-x-4">
+      <button class="hover:underline">🔍 Buscar</button>
+      <button class="hover:underline">📋 Publicações</button>
+      <button id="newPostBtn" class="hover:underline">➕ Novo Post</button>
+    </nav>
   </header>
 
-  <div class="forum-container" id="forum">
-    <!-- Os posts serão inseridos aqui dinamicamente -->
-  </div>
+  <main class="p-6 max-w-4xl mx-auto">
+    <!-- Seção de busca -->
+    <section class="mb-8 text-center">
+      <h1 class="text-3xl font-bold mb-2">🔎 Busca Inteligente</h1>
+      <p class="text-sm text-gray-400 mb-4">Procure por conteúdo relacionado. A IA sugerirá tópicos semelhantes.</p>
+      <input type="text" placeholder="Digite sua dúvida ou tópico..." class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" />
+      <div class="mt-4 flex justify-center gap-4">
+        <select class="bg-gray-800 border border-gray-600 rounded p-2">
+          <option>5 resultados</option>
+          <option>10 resultados</option>
+        </select>
+        <button class="bg-purple-600 px-4 py-2 rounded hover:bg-purple-700">Buscar</button>
+      </div>
+    </section>
 
-  <div class="footer">
-    © 2025 Comunidade SPACE
-  </div>
+    <!-- Lista de posts -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4">📋 Publicações Recentes</h2>
+      <div class="space-y-4">
+        <!-- Exemplo de post -->
+        <div class="bg-gray-800 p-4 rounded shadow border border-gray-700">
+          <h3 class="text-xl font-bold">Como integrar IA em um fórum?</h3>
+          <p class="text-sm text-gray-400">Publicado por Ana Dev • Tags: #IA #fórum #busca</p>
+          <p class="mt-2">Gostaria de sugestões para incorporar respostas inteligentes em meu sistema de perguntas e respostas...</p>
+          <button class="mt-2 text-sm text-purple-400 hover:underline">Ver mais</button>
+        </div>
+      </div>
+    </section>
 
-<script>
-  const forum = document.getElementById("forum");
+    <!-- Novo post -->
+    <section id="newPostForm" class="hidden bg-gray-800 p-6 rounded shadow border border-gray-700">
+      <h2 class="text-2xl font-semibold mb-4">➕ Novo Post</h2>
+      <input type="text" placeholder="Título do post" class="w-full p-3 mb-3 rounded bg-gray-900 border border-gray-600" />
+      <input type="text" placeholder="Tags separadas por vírgula" class="w-full p-3 mb-3 rounded bg-gray-900 border border-gray-600" />
+      <textarea rows="4" placeholder="Descrição / Pergunta..." class="w-full p-3 mb-3 rounded bg-gray-900 border border-gray-600"></textarea>
+      <button class="bg-green-600 px-4 py-2 rounded hover:bg-green-700">Publicar</button>
+    </section>
+  </main>
 
-  fetch("posts.json")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Erro ao carregar o JSON");
-      }
-      return response.json();
-    })
-    .then(posts => {
-      posts.forEach(post => {
-        const div = document.createElement("div");
-        div.className = "forum-post";
-        div.innerHTML = `
-          <h2>${post.titulo}</h2>
-          <p><strong>Autor:</strong> ${post.autor}</p>
-          <p>${post.mensagem}</p>
-        `;
-        forum.appendChild(div);
-      });
-    })
-    .catch(error => {
-      forum.innerHTML = "<p style='color: red;'>Erro ao carregar posts.</p>";
-      console.error(error);
+  <script>
+    // Alternar o formulário de novo post
+    document.getElementById('newPostBtn').addEventListener('click', () => {
+      const form = document.getElementById('newPostForm');
+      form.classList.toggle('hidden');
     });
-</script>
+  </script>
 </body>
 </html>
