@@ -78,38 +78,32 @@
     © 2025 Comunidade SPACE
   </div>
 
-  <script>
-    // Exemplo de "base de dados" (mock JSON dos tópicos do fórum)
-    const posts = [
-      {
-        titulo: "Como calcular órbitas de satélites LEO?",
-        autor: "Ana",
-        mensagem: "Estou desenvolvendo um projeto para um cubesat e preciso simular a órbita. Alguém recomenda ferramentas?"
-      },
-      {
-        titulo: "Melhores práticas para criar um Digital Twin",
-        autor: "Carlos",
-        mensagem: "Estou usando a abordagem PFS com Shell Administrativa. Como modelar eventos de falha?"
-      },
-      {
-        titulo: "Dúvidas sobre sensores embarcados em microgravidade",
-        autor: "Luna",
-        mensagem: "Quais sensores térmicos funcionam melhor em ambiente de microgravidade?"
+<script>
+  const forum = document.getElementById("forum");
+
+  fetch("posts.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao carregar o JSON");
       }
-    ];
-
-    const forum = document.getElementById("forum");
-
-    posts.forEach(post => {
-      const div = document.createElement("div");
-      div.className = "forum-post";
-      div.innerHTML = `
-        <h2>${post.titulo}</h2>
-        <p><strong>Autor:</strong> ${post.autor}</p>
-        <p>${post.mensagem}</p>
-      `;
-      forum.appendChild(div);
+      return response.json();
+    })
+    .then(posts => {
+      posts.forEach(post => {
+        const div = document.createElement("div");
+        div.className = "forum-post";
+        div.innerHTML = `
+          <h2>${post.titulo}</h2>
+          <p><strong>Autor:</strong> ${post.autor}</p>
+          <p>${post.mensagem}</p>
+        `;
+        forum.appendChild(div);
+      });
+    })
+    .catch(error => {
+      forum.innerHTML = "<p style='color: red;'>Erro ao carregar posts.</p>";
+      console.error(error);
     });
-  </script>
+</script>
 </body>
 </html>
